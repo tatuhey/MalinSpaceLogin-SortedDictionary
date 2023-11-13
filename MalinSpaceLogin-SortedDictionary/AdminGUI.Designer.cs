@@ -149,6 +149,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AdminGUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminGUI_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AdminGUI_KeyDown);
             this.gbShortcuts.ResumeLayout(false);
             this.gbShortcuts.PerformLayout();
             this.gbAdmin.ResumeLayout(false);
