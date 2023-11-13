@@ -12,6 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
 using System.IO;
+using System.Diagnostics;
 
 namespace MalinSpaceLogin_SortedDictionary
 {
@@ -20,11 +21,19 @@ namespace MalinSpaceLogin_SortedDictionary
         public GeneralGUI()
         {
             InitializeComponent();
+            ConfigureTraceListener();
             ReadData();
             DisplayDataInListBox();
             this.KeyPreview = true;
             ClearAllTexts();
         }
+        private void ConfigureTraceListener()
+        {
+            string logFilePath = "TraceOutput.log";
+            TextWriterTraceListener textListener = new TextWriterTraceListener(File.Create(logFilePath));
+            Trace.Listeners.Add(textListener);
+        }
+
 
         private object lastItemSelected = null;
         private bool wasEnterKeyPressed = false;
@@ -37,6 +46,8 @@ namespace MalinSpaceLogin_SortedDictionary
         //6.2.	Create a method that will read the data from the.csv file into the SortedDictionary data structure when the GUI loads.
         private void ReadData()
         {
+            Trace.WriteLine("Tracing 6.2 ReadData() in SortedDictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "MalinStaffNamesV2.csv");
 
             try
@@ -69,12 +80,17 @@ namespace MalinSpaceLogin_SortedDictionary
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stLabel.Text = "Error";
             }
-
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for ReadData() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         //6.3.	Create a method to display the SortedDictionary data into a non-selectable display only list box (ie read only).
         private void DisplayDataInListBox()
         {
+            Trace.WriteLine("Tracing 6.3 DisplayDataInListBox() in Dictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 lbStaffMain.Items.Clear();  // Clear any existing items
@@ -91,6 +107,10 @@ namespace MalinSpaceLogin_SortedDictionary
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stLabel.Text = "Error";
             }
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for DisplayDataInListBox() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         //6.4.	Create a method to filter the Staff Name data from the SortedDictionary into a second filtered and selectable list box.
@@ -98,6 +118,8 @@ namespace MalinSpaceLogin_SortedDictionary
         //      The list box must reflect the filtered data in real time.
         private void FilterByNameAndDisplay()
         {
+            Trace.WriteLine("Tracing 6.4 FilterByNameAndDisplay() in Dictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 if (string.IsNullOrWhiteSpace(tbName.Text))
@@ -122,6 +144,10 @@ namespace MalinSpaceLogin_SortedDictionary
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stLabel.Text = "Error";
             }
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for FilterByNameAndDisplay() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         private void tbName_TextChanged(object sender, EventArgs e)
@@ -134,6 +160,8 @@ namespace MalinSpaceLogin_SortedDictionary
         //      The list box must reflect the filtered data in real time.
         private void FilterByIDAndDisplay()
         {
+            Trace.WriteLine("Tracing 6.5 FilterByIDAndDisplay() in Dictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 if (string.IsNullOrWhiteSpace(tbID.Text))
@@ -158,6 +186,10 @@ namespace MalinSpaceLogin_SortedDictionary
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stLabel.Text = "Error";
             }
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for  FilterByIDAndDisplay() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         private void tbID_TextChanged(object sender, EventArgs e)
@@ -258,6 +290,8 @@ namespace MalinSpaceLogin_SortedDictionary
 
         private void OpenAdminGUI()
         {
+            Trace.WriteLine("Tracing 6.9 OpenAdminGUI() in Dictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             try
             {
                 // Check if SelectedItem is not null
@@ -290,6 +324,10 @@ namespace MalinSpaceLogin_SortedDictionary
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stLabel.Text = "Error";
             }
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for OpenAdminGUI() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         //6.10.	Add suitable error trapping and user feedback via a status strip or similar to ensure a fully functional User Experience.
@@ -323,6 +361,12 @@ namespace MalinSpaceLogin_SortedDictionary
             lastItemSelected = null;
             this.Focus();
             stLabel.Text = string.Empty;
+        }
+
+        private void GeneralGUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Trace.Flush();
+            foreach (TraceListener listener in Trace.Listeners) { listener.Close(); }
         }
         #endregion
 

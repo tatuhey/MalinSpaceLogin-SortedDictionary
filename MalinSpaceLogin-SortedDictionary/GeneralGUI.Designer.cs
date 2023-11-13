@@ -213,6 +213,7 @@
             this.Controls.Add(this.gbLogin);
             this.Name = "GeneralGUI";
             this.Text = "Malin Staff Detail - Sorted Dictionary";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GeneralGUI_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GeneralGUI_KeyDown);
             this.gbRawdata.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
