@@ -66,6 +66,7 @@
             this.lbStaffMain.Name = "lbStaffMain";
             this.lbStaffMain.Size = new System.Drawing.Size(177, 290);
             this.lbStaffMain.TabIndex = 0;
+            this.lbStaffMain.TabStop = false;
             // 
             // statusStrip
             // 
@@ -160,7 +161,7 @@
             this.tbID.Location = new System.Drawing.Point(72, 13);
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(111, 20);
-            this.tbID.TabIndex = 5;
+            this.tbID.TabIndex = 0;
             this.tbID.TextChanged += new System.EventHandler(this.tbID_TextChanged);
             this.tbID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbID_KeyDown);
             this.tbID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbID_KeyPress);
@@ -170,7 +171,7 @@
             this.tbName.Location = new System.Drawing.Point(72, 42);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(111, 20);
-            this.tbName.TabIndex = 4;
+            this.tbName.TabIndex = 1;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             this.tbName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbName_KeyDown);
             // 
@@ -180,7 +181,7 @@
             this.lbStaffSecondary.Location = new System.Drawing.Point(6, 68);
             this.lbStaffSecondary.Name = "lbStaffSecondary";
             this.lbStaffSecondary.Size = new System.Drawing.Size(177, 238);
-            this.lbStaffSecondary.TabIndex = 1;
+            this.lbStaffSecondary.TabIndex = 2;
             this.lbStaffSecondary.SelectedIndexChanged += new System.EventHandler(this.lbStaffSecondary_SelectedIndexChanged);
             this.lbStaffSecondary.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbStaffSecondary_KeyDown);
             // 

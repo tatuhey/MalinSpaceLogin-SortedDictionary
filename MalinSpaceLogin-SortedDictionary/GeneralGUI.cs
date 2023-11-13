@@ -125,7 +125,7 @@ namespace MalinSpaceLogin_SortedDictionary
                 if (string.IsNullOrWhiteSpace(tbName.Text))
                 {
                     lbStaffSecondary.Items.Clear();
-                    stLabel.Text = string.Empty;
+                    stLabel.Text = "Enter a name to filter.";
                 }
                 else
                 {
@@ -137,12 +137,12 @@ namespace MalinSpaceLogin_SortedDictionary
                         lbStaffSecondary.Items.Add($"{entry.Key}    |    {entry.Value}");
                     }
                 }
-                stLabel.Text = "Filter by name is underway";
+                stLabel.Text = "Filter by name is complete.";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                stLabel.Text = "Error";
+                stLabel.Text = "Error during filtering.";
             }
             sw.Stop();
             Trace.WriteLine($"The elapsed time for FilterByNameAndDisplay() is {sw.ElapsedTicks} ticks");
@@ -153,6 +153,9 @@ namespace MalinSpaceLogin_SortedDictionary
         private void tbName_TextChanged(object sender, EventArgs e)
         {
             FilterByNameAndDisplay();
+            int swap = tbID.TabIndex;
+            tbID.TabIndex = tbName.TabIndex;
+            tbName.TabIndex = swap;
         }
 
         //6.5.	Create a method to filter the Staff ID data from the SortedDictionary into the second filtered and selectable list box.
@@ -167,7 +170,7 @@ namespace MalinSpaceLogin_SortedDictionary
                 if (string.IsNullOrWhiteSpace(tbID.Text))
                 {
                     lbStaffSecondary.Items.Clear();
-                    stLabel.Text = string.Empty;
+                    stLabel.Text = "Enter an ID to filter.";
                 }
                 else
                 {
@@ -179,7 +182,7 @@ namespace MalinSpaceLogin_SortedDictionary
                         lbStaffSecondary.Items.Add($"{entry.Key}    |    {entry.Value}");
                     }
                 }
-                stLabel.Text = "Filter by ID is underway";
+                stLabel.Text = "Filter by ID is complete.";
             }
             catch (Exception ex)
             {
@@ -195,6 +198,9 @@ namespace MalinSpaceLogin_SortedDictionary
         private void tbID_TextChanged(object sender, EventArgs e)
         {
             FilterByIDAndDisplay();
+            int swap = tbID.TabIndex;
+            tbID.TabIndex = tbName.TabIndex;
+            tbName.TabIndex = swap;
         }
 
         private void tbID_KeyPress(object sender, KeyPressEventArgs e)

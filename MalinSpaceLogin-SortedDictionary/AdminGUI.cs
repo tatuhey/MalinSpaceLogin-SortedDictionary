@@ -74,13 +74,15 @@ namespace MalinSpaceLogin_SortedDictionary
                     if (!string.IsNullOrWhiteSpace(name))
                     {
                         GeneralGUI.MasterFile.Add(staffID, name);
-                        MessageBox.Show("New entry has been added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        stText.Text = "New entry has been added successfully!";
+                        //MessageBox.Show("New entry has been added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
-                        MessageBox.Show("Please enter a valid name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        stText.Text = "Please enter a valid name";
+                        //MessageBox.Show("Please enter a valid name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
-                    MessageBox.Show("This staff ID is already in the record", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    stText.Text = "This staff ID is already in the record";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             sw.Stop();
@@ -103,13 +105,13 @@ namespace MalinSpaceLogin_SortedDictionary
                     {
                         // Update the name associated with the staff ID
                         GeneralGUI.MasterFile[staffID] = tbName.Text.Trim();
-                        MessageBox.Show("Name updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        stText.Text = "Name updated successfully!";
                     }
                     else
                         MessageBox.Show($"Staff ID {staffID} not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
-                    MessageBox.Show("Please enter a valid Staff ID and Name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    stText.Text = "Please enter a valid Staff ID and Name.";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             sw.Stop();
@@ -134,13 +136,13 @@ namespace MalinSpaceLogin_SortedDictionary
                         GeneralGUI.MasterFile.Remove(staffID);
                         tbID.Text = string.Empty;
                         tbName.Text = string.Empty;
-                        MessageBox.Show("Selected entry has been deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        stText.Text = "Selected entry has been deleted successfully!";
                     }
                     else
                         MessageBox.Show($"Staff ID {staffID} not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
-                    MessageBox.Show("Please enter a valid Staff ID and Name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    stText.Text = "Please enter a valid Staff ID and Name.";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             sw.Stop();
@@ -164,7 +166,7 @@ namespace MalinSpaceLogin_SortedDictionary
                         writer.WriteLine($"{entry.Key},{entry.Value}"); // Write each key,value pair as a line in the CSV
                     }
                 }
-                MessageBox.Show("New file is saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                stText.Text = "New file is saved successfully!";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             sw.Stop();
