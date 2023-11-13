@@ -257,6 +257,8 @@ namespace MalinSpaceLogin_SortedDictionary
 
         private void PopulateTextboxes()
         {
+            Trace.WriteLine("Tracing 6.8 PopulateTextboxes() in Dictionary");
+            Stopwatch sw = Stopwatch.StartNew();
             if (lastItemSelected != null)
             {
                 string[] parts = lastItemSelected.ToString().Split(new string[] { "    |    " }, StringSplitOptions.None);
@@ -267,6 +269,10 @@ namespace MalinSpaceLogin_SortedDictionary
                 }
             }
             stLabel.Text = "Details are available";
+            sw.Stop();
+            Trace.WriteLine($"The elapsed time for PopulateTextboxes() is {sw.ElapsedTicks} ticks");
+            Trace.WriteLine("---");
+            Trace.Flush();
         }
 
         //6.9.	Create a method that will open the Admin GUI when the Alt + A keys are pressed.
